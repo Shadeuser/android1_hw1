@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wheather</string>
+    <string name="city_name">Moscow, Russia</string>
+    <string name="head_name">Wheather forecast</string>
+    <string name="temperature">+25</string>
+    <string name="cloudy">Partly cloudy</string>
+
+
+</resources>
