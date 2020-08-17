@@ -2,6 +2,9 @@
 <resources>
     <dimen name="margin_dayOfWeek">15dp</dimen>
     <dimen name="margin_buttons">5dp</dimen>
+    <dimen name="margin_top_city_choose_text">100dp</dimen>
+    <dimen name="city_text">30dp</dimen>
+    <dimen name="confirm_button_margin_bottom">20dp</dimen>
 
 
 

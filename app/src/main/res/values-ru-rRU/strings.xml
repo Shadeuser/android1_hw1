@@ -3,10 +3,13 @@
 
 <resources>
     <string name="app_name">Погода</string>
-    <string name="city_name">Москва, Россия</string>
+    <string name="city_name">Москва</string>
     <string name="head_name">Прогноз Погоды</string>
     <string name="temperature">+25</string>
     <string name="cloudy">Переменная облачность</string>
+    <string name="cityChoose">Выберете город: </string>
+    <string name="confirmButtonText">Выбрать</string>
+    <string name="extraOptionseText">Показывать доп. параметры</string>
 
 
 </resources>
