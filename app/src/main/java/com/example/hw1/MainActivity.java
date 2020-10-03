@@ -4,11 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +27,25 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
-    TextView txtTemperature;
-    Button btnToday;
+    //For dimensions MainFr
+    LinearLayout linearCurWeather;
+    LinearLayout linearDayButtons;
+    TextView txtAboutWeather;
     Button btnChangeCity;
-    String todayTemperature;
     TextView txtCityName;
-    TextView txtExraWeather;
+    TextView txtExtraWeather;
+
+    //For dimensions OneFr
+    TextView txtCityChoose;
+    EditText edtChangeCityName;
+    Button btnConfirm;
+    CheckBox chkExtraParams;
+    Fragment fragMain;
+    FragmentTransaction fTrans;
+
+
+
+    final String MY_TAG ="MY_TAG";
 
 
 
@@ -31,93 +53,79 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("myTAG", "onCreate");
         setContentView(R.layout.activity_main);
+//        Log.d(MY_TAG, getScreenOrientation());
+        getScreenOrientation();
 
-        btnToday = findViewById(R.id.btnToday);
+
+    }
+
+
+
+    private String getScreenOrientation() {
+        linearCurWeather = findViewById(R.id.linearCurWeather);
+        txtAboutWeather = findViewById(R.id.txtAboutWeather);
+        linearDayButtons = findViewById(R.id.linearDayButtons);
         btnChangeCity = findViewById(R.id.btnChangeCity);
-        txtTemperature = findViewById(R.id.txtTemperature);
-        todayTemperature = txtTemperature.getText().toString();
+        txtCityChoose = findViewById(R.id.txtCityChoose);
+        edtChangeCityName = findViewById(R.id.edtChangeCityName);
 
-        btnToday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                todayTemperature = "+15";
-                txtTemperature.setText(todayTemperature);
-            }
-        });
-
-        btnChangeCity.setOnClickListener((v)-> {
-            Intent intent = new Intent(MainActivity.this, CityActivity.class);
-            startActivityForResult(intent, RESULT_INT);
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("myTAG", "onStart");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("myTAG", "onStop");
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("myTAG", "onDestroy");
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.d("myTAG", "onSaveInstanceState");
-        outState.putString(EXTRA_COUNTER, todayTemperature);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("myTAG", "onPause");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("myTAG", "onResume");
-    }
+//        btnChangeCity = view.findViewById(R.id.btnChangeCity);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            linearCurWeather.setPadding(0,100, 0, 0);
+//            txtAboutWeather.setPadding(0, 70, 0, 0);
 
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.d("myTAG", "onRestoreInstanceState");
-        final String savedTemperature = savedInstanceState.getString(EXTRA_COUNTER, "-");
-        txtTemperature.setText(String.valueOf(savedTemperature));
-    }
 
+            return "Портретная ориентация";
+        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+            linearCurWeather.setPadding(0, 0, 0, 0);
+            txtAboutWeather.setPadding(0,0,0,0);
+            linearDayButtons.setPadding(0, 0, 0, 0);
+            btnChangeCity.setVisibility(View.GONE);
+            txtCityChoose.setPadding(0, 0, 0, 0);
+            edtChangeCityName.setPadding(0, 50, 0, 0);
 
-        WeatherParams weatherParams = (WeatherParams) data.getExtras().getSerializable(INTENT_TEXT);
-        if (resultCode == RESULT_OK) {
-            txtCityName = findViewById(R.id.txtCityName);
-            txtCityName.setText(weatherParams.getCity());
-
-            txtExraWeather = findViewById(R.id.txtExtraWeather);
-            if (weatherParams.getExtras()) {
-                txtExraWeather.setVisibility(View.VISIBLE);
-            } else {
-                txtExraWeather.setVisibility(View.INVISIBLE);
-            };
-
-
+            btnConfirm = findViewById(R.id.confirmButton);
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickBtnConfirm();
+                }
+            });
+            return "Альбомная ориентация";
+        } else {
+            return "";
         }
+
     }
+
+
+
+
+
+    public void onClickBtnConfirm() {
+        edtChangeCityName = findViewById(R.id.edtChangeCityName);
+        chkExtraParams = findViewById(R.id.chkExtraParams);
+        txtCityName = findViewById(R.id.txtCityName);
+        txtExtraWeather = findViewById(R.id.txtExtraWeather);
+//        fragMain = new MainFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString(CITY_BUNDLE, edtChangeCityName.getText().toString());
+//        bundle.putBoolean(ADD_OPTIONS_BUNDLE, chkExtraParams.isChecked());
+//        fragMain.setArguments(bundle);
+         txtCityName.setText(edtChangeCityName.getText());
+         int vis = chkExtraParams.isChecked() ? View.VISIBLE : View.GONE;
+         txtExtraWeather.setVisibility(vis);
+//        fTrans = getSupportFragmentManager().beginTransaction();
+//        fTrans.replace(R.id.frPlace, fragMain);
+//        fTrans.commit();
+    }
+
+
+
+
+
+
 }

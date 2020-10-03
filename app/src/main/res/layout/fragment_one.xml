@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/appBackgroundColor"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
@@ -14,19 +15,17 @@
         android:text="@string/cityChoose"
         android:textSize="22dp"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/txtChangeCityName"
+        app:layout_constraintStart_toStartOf="@+id/edtChangeCityName"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/margin_top_city_choose_text"/>
+        android:paddingTop="100dp" />
 
     <EditText
-        android:id="@+id/txtChangeCityName"
+        android:id="@+id/edtChangeCityName"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-
-
         android:ems="10"
+        android:paddingTop="76sp"
         android:text="@string/city_name"
         android:textSize="22dp"
         android:textStyle="bold"
@@ -36,7 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCityChoose" />
 
     <Button
-
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/city_text"
         android:text="Доп параметры"
-        app:layout_constraintStart_toStartOf="@+id/txtChangeCityName"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangeCityName" />
+        app:layout_constraintStart_toStartOf="@+id/edtChangeCityName"
+        app:layout_constraintTop_toBottomOf="@+id/edtChangeCityName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
