@@ -12,47 +12,107 @@
         android:id="@+id/txtCityChoose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:text="@string/cityChoose"
         android:textSize="22dp"
+
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/edtChangeCityName"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingTop="100dp" />
-
-    <EditText
-        android:id="@+id/edtChangeCityName"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:paddingTop="76sp"
-        android:text="@string/city_name"
-        android:textSize="22dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCityChoose" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/confirmButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/confirm_button_margin_bottom"
-        android:background="@color/buttonsColor"
-        android:text="@string/confirmButtonText"
-        app:layout_constraintBottom_toBottomOf="parent"
+<!--    <EditText-->
+<!--        android:id="@+id/edtChangeCityName"-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="88dp"-->
+<!--        android:ems="10"-->
+<!--        android:paddingTop="76sp"-->
+<!--        android:text="@string/city_name"-->
+<!--        android:textSize="22dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtCityChoose" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cityRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCityChoose">
 
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/buttonsColor"
+            android:text="@string/confirmButtonText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button"></Button>
+
+        <Button
+            android:id="@+id/btnAddCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@color/buttonsColor"
+            android:text="Add">
+
+        </Button>
+
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/chkExtraParams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/city_text"
+        android:layout_marginTop="8dp"
+
+
         android:text="Доп параметры"
-        app:layout_constraintStart_toStartOf="@+id/edtChangeCityName"
-        app:layout_constraintTop_toBottomOf="@+id/edtChangeCityName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTown" />
+
+    <TextView
+        android:id="@+id/txtTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityRecyclerView" />
+
+    <EditText
+        android:id="@+id/edtAddCity"
+        android:layout_width="173dp"
+        android:layout_height="44dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="204dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

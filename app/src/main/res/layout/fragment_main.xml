@@ -73,7 +73,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
@@ -155,42 +155,63 @@
             android:text="+19"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearDayButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="50dp"
+        android:layout_gravity="center"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:paddingTop="10dp">
+
         <Button
             android:id="@+id/btnToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/buttonsColor"
             android:layout_margin="@dimen/margin_buttons"
-            android:text="Сегодня"/>
+            android:background="@color/buttonsColor"
+            android:text="Сегодня" />
+
         <Button
             android:id="@+id/btnTomorrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/buttonsColor"
             android:layout_margin="@dimen/margin_buttons"
-            android:text="Завтра"/>
+            android:background="@color/buttonsColor"
+            android:text="Завтра" />
 
         <Button
             android:id="@+id/btnAfterTomorrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/buttonsColor"
             android:layout_margin="@dimen/margin_buttons"
-            android:text="Послезавтра"/>
+            android:background="@color/buttonsColor"
+            android:text="Послезавтра" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnChangeCity"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/buttonsColor"
-        android:layout_marginTop="10dp"
-        android:text="@string/changeYourCity"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnChangeCity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/buttonsColor"
+            android:layout_margin="5dp"
+            android:text="@string/changeYourCity"/>
+        <Button
+            android:id="@+id/btnWeatherHistory"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/buttonsColor"
+            android:text="Weather history">
+        </Button>
+
+    </LinearLayout>
+
 </LinearLayout>

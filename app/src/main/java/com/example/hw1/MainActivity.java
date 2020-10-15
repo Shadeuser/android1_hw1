@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -42,12 +43,12 @@ public class MainActivity extends AppCompatActivity implements Constants {
     CheckBox chkExtraParams;
     Fragment fragMain;
     FragmentTransaction fTrans;
-
+    RecyclerView cityRecyclerView;
 
 
     final String MY_TAG ="MY_TAG";
 
-
+    Button btnWeatherHistory;
 
 
     @Override
@@ -68,15 +69,21 @@ public class MainActivity extends AppCompatActivity implements Constants {
         linearDayButtons = findViewById(R.id.linearDayButtons);
         btnChangeCity = findViewById(R.id.btnChangeCity);
         txtCityChoose = findViewById(R.id.txtCityChoose);
-        edtChangeCityName = findViewById(R.id.edtChangeCityName);
+//        edtChangeCityName = findViewById(R.id.edtChangeCityName);
+        cityRecyclerView = findViewById(R.id.cityRecyclerView);
 
-//        btnChangeCity = view.findViewById(R.id.btnChangeCity);
+
+
+        btnWeatherHistory = findViewById(R.id.btnWeatherHistory);
+        btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            linearCurWeather.setPadding(0,100, 0, 0);
-//            txtAboutWeather.setPadding(0, 70, 0, 0);
-
-
-
             return "Портретная ориентация";
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
             linearDayButtons.setPadding(0, 0, 0, 0);
             btnChangeCity.setVisibility(View.GONE);
             txtCityChoose.setPadding(0, 0, 0, 0);
-            edtChangeCityName.setPadding(0, 50, 0, 0);
+//            edtChangeCityName.setPadding(0, 50, 0, 0);
 
             btnConfirm = findViewById(R.id.confirmButton);
             btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -106,21 +113,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
 
     public void onClickBtnConfirm() {
-        edtChangeCityName = findViewById(R.id.edtChangeCityName);
+//        edtChangeCityName = findViewById(R.id.edtChangeCityName);
         chkExtraParams = findViewById(R.id.chkExtraParams);
         txtCityName = findViewById(R.id.txtCityName);
         txtExtraWeather = findViewById(R.id.txtExtraWeather);
-//        fragMain = new MainFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString(CITY_BUNDLE, edtChangeCityName.getText().toString());
-//        bundle.putBoolean(ADD_OPTIONS_BUNDLE, chkExtraParams.isChecked());
-//        fragMain.setArguments(bundle);
-         txtCityName.setText(edtChangeCityName.getText());
-         int vis = chkExtraParams.isChecked() ? View.VISIBLE : View.GONE;
-         txtExtraWeather.setVisibility(vis);
-//        fTrans = getSupportFragmentManager().beginTransaction();
-//        fTrans.replace(R.id.frPlace, fragMain);
-//        fTrans.commit();
+
+        txtCityName.setText(edtChangeCityName.getText());
+        int vis = chkExtraParams.isChecked() ? View.VISIBLE : View.GONE;
+        txtExtraWeather.setVisibility(vis);
     }
 
 

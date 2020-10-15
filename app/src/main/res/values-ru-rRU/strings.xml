@@ -11,6 +11,7 @@
     <string name="confirmButtonText">Выбрать</string>
     <string name="extraOptionseText">Показывать доп. параметры</string>
     <string name="changeYourCity">Выберете город</string>
+    <string name="currentCity">Москва</string>
 
 
 </resources>

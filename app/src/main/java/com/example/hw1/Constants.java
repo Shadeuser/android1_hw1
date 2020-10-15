@@ -5,8 +5,11 @@ import java.io.Serializable;
 public interface Constants {
     String EXTRA_COUNTER = "EXTRA_COUNTER_MAIN_ACTIVITY";
     String INTENT_TEXT = "Main-City";
-    String CITY_BUNDLE = "CITY";
-    String ADD_OPTIONS_BUNDLE = "ADDINIONAL";
+    final String CITY_BUNDLE = "CITY";
+    final String ADD_OPTIONS_BUNDLE = "ADDINIONAL";
+    final String LOG_INFO = "LOG_INFO";
     int RESULT_INT = 112;
+
+
 
 }
