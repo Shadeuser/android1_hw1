@@ -164,28 +164,34 @@
         android:orientation="horizontal"
         android:paddingTop="10dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:layout_margin="@dimen/margin_buttons"
             android:background="@color/buttonsColor"
+            style="@style/WeatherButtonStyle"
             android:text="Сегодня" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTomorrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:layout_margin="@dimen/margin_buttons"
+            style="@style/WeatherButtonStyle"
             android:background="@color/buttonsColor"
             android:text="Завтра" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAfterTomorrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:layout_margin="@dimen/margin_buttons"
-            android:background="@color/buttonsColor"
+            style="@style/WeatherButtonStyle"
+
             android:text="Послезавтра" />
     </LinearLayout>
 
@@ -194,23 +200,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeCity"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@color/buttonsColor"
+            android:theme="@style/Theme.MaterialComponents.Light"
             android:layout_margin="5dp"
+            style="@style/WeatherButtonStyle"
             android:text="@string/changeYourCity"/>
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnWeatherHistory"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@color/buttonsColor"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            style="@style/WeatherButtonStyle"
             android:text="Weather history">
-        </Button>
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 

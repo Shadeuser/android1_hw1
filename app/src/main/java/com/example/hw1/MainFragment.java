@@ -29,6 +29,7 @@ public class MainFragment extends Fragment implements Constants {
 
 
     Button btnChangeCity;
+    Button btnWeatherHistory;
 
 
     TextView txtExraWeather;
@@ -76,6 +77,15 @@ public class MainFragment extends Fragment implements Constants {
 
 
         }
+
+        btnWeatherHistory = view.findViewById(R.id.btnWeatherHistory);
+        btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), HistoryActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         btnChangeCity.setOnClickListener(new View.OnClickListener() {

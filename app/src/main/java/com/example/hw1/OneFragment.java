@@ -25,10 +25,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class OneFragment extends Fragment implements Constants {
@@ -44,12 +48,11 @@ public class OneFragment extends Fragment implements Constants {
     ArrayList myList;
     Button btnAddCity;
     EditText edtAddCity;
-
-
+    Pattern checkCity = Pattern.compile("[А-Я][а-я]{2,}$");
 
     private final String[] cities = {
-        "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
-        "Рязань", "Челябинск", "Уфа"
+            "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
+            "Рязань", "Челябинск", "Уфа"
     };
 
 
@@ -88,15 +91,16 @@ public class OneFragment extends Fragment implements Constants {
         btnAddCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCityToList(edtAddCity.getText().toString());
-
+                String myCity = edtAddCity.getText().toString();
+                if (isCityCorrect(myCity, checkCity)) {
+                    Snackbar.make(view, "Вы хотите добавить '"+myCity+"' в список?", BaseTransientBottomBar.LENGTH_LONG).setAction("Да", (v1 -> {
+                        addCityToList(edtAddCity.getText().toString());
+                    })).show();
+                } else  {
+                    Snackbar.make(view,"Город должен состоять только из русских букв", BaseTransientBottomBar.LENGTH_SHORT).show();
+                }
             }
         });
-
-
-
-
-
 
 
         txtTown = view.findViewById(R.id.txtTown);
@@ -105,16 +109,26 @@ public class OneFragment extends Fragment implements Constants {
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String myCity = txtTown.getText().toString();
+                    if (myCity.length()>0) {
+                        Snackbar.make(view, "Вы выбрали город: " + myCity, BaseTransientBottomBar.LENGTH_LONG)
+                                .setAction("Верно", (v1 -> {
+                                    chkExtraParams = view.findViewById(R.id.chkExtraParams);
+                                    fragMain = new MainFragment();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(CITY_BUNDLE, txtTown.getText().toString());
+                                    bundle.putBoolean(ADD_OPTIONS_BUNDLE, chkExtraParams.isChecked());
+                                    fragMain.setArguments(bundle);
+                                    fTrans = getFragmentManager().beginTransaction();
+                                    fTrans.replace(R.id.frPlace, fragMain);
+                                    fTrans.commit();
+                                })).show();
 
-                    chkExtraParams = view.findViewById(R.id.chkExtraParams);
-                    fragMain = new MainFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(CITY_BUNDLE, txtTown.getText().toString());
-                    bundle.putBoolean(ADD_OPTIONS_BUNDLE, chkExtraParams.isChecked());
-                    fragMain.setArguments(bundle);
-                    fTrans = getFragmentManager().beginTransaction();
-                    fTrans.replace(R.id.frPlace, fragMain);
-                    fTrans.commit();
+                    } else {
+                        Snackbar.make(view,"Вы не выбрали город!", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    }
+
+
                 }
             });
 
@@ -122,11 +136,18 @@ public class OneFragment extends Fragment implements Constants {
 
     }
 
+    private boolean isCityCorrect (String value, Pattern check) {
+        if (check.matcher(value).matches()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void addCityToList(String curCity) {
         myList.add(curCity);
         adapter.setList(myList);
     }
-
 
 
 }

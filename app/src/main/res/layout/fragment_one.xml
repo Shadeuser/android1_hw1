@@ -21,21 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/edtChangeCityName"-->
-
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="88dp"-->
-<!--        android:ems="10"-->
-<!--        android:paddingTop="76sp"-->
-<!--        android:text="@string/city_name"-->
-<!--        android:textSize="22dp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/txtCityChoose" />-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cityRecyclerView"
         android:layout_width="match_parent"
@@ -53,30 +38,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/confirmButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/buttonsColor"
-            android:text="@string/confirmButtonText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button"></Button>
+            android:theme="@style/Theme.MaterialComponents.Light"
+            style="@style/WeatherButtonStyle"
+            android:text="@string/confirmButtonText">
 
-        <Button
+        </com.google.android.material.button.MaterialButton>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddCity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@color/buttonsColor"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            style="@style/WeatherButtonStyle"
             android:text="Add">
 
-        </Button>
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 
@@ -103,16 +90,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityRecyclerView" />
 
-    <EditText
-        android:id="@+id/edtAddCity"
-        android:layout_width="173dp"
-        android:layout_height="44dp"
-        android:layout_margin="5dp"
-        android:layout_marginBottom="204dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtAddCity"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            tools:layout_editor_absoluteX="175dp"
+            tools:layout_editor_absoluteY="424dp">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

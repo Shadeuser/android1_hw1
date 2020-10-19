@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,6 +29,8 @@ import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
+
+
     //For dimensions MainFr
     LinearLayout linearCurWeather;
     LinearLayout linearDayButtons;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     final String MY_TAG ="MY_TAG";
 
-    Button btnWeatherHistory;
+
 
 
     @Override
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         setContentView(R.layout.activity_main);
 //        Log.d(MY_TAG, getScreenOrientation());
         getScreenOrientation();
+
 
 
     }
@@ -74,14 +78,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
 
 
-        btnWeatherHistory = findViewById(R.id.btnWeatherHistory);
-        btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             return "Портретная ориентация";
