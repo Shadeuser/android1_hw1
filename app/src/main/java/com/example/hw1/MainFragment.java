@@ -30,19 +30,10 @@ public class MainFragment extends Fragment implements Constants {
 
     Button btnChangeCity;
     Button btnWeatherHistory;
-
-
-    TextView txtExraWeather;
     TextView txtTemperature;
+    TextView txtWindSpeed;
+    TextView txtHimidity;
     TextView txtCityName;
-
-
-
-    //For dimensions
-    LinearLayout linearCurWeather;
-    LinearLayout linearDayButtons;
-    TextView txtAboutWeather;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,40 +48,79 @@ public class MainFragment extends Fragment implements Constants {
         super.onViewCreated(view, savedInstanceState);
         btnChangeCity = view.findViewById(R.id.btnChangeCity);
         txtTemperature = view.findViewById(R.id.txtTemperature);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            txtCityName = view.findViewById(R.id.txtCityName);
-            txtExraWeather = view.findViewById(R.id.txtExtraWeather);
+        savedInstanceState = getArguments();
+        if (savedInstanceState != null) {
 
+//            savedInstanceState = getArguments();
             txtTemperature = view.findViewById(R.id.txtTemperature);
-            savedInstanceState = getArguments();
-            if (savedInstanceState != null) {
-                txtCityName = view.findViewById(R.id.txtCityName);
-                txtCityName.setText(savedInstanceState.getString(CITY_BUNDLE));
-                txtExraWeather = view.findViewById(R.id.txtExtraWeather);
-                if (bundle.getBoolean(ADD_OPTIONS_BUNDLE) == true) {
-                    txtExraWeather.setVisibility(View.VISIBLE);
-                } else {
-                    txtExraWeather.setVisibility(View.INVISIBLE);
-                }
+            txtWindSpeed = view.findViewById(R.id.txtWindSpeed);
+            txtHimidity = view.findViewById(R.id.txtHumidity);
+            txtCityName = view.findViewById(R.id.txtCityName);
+            String currentCityName = savedInstanceState.getString(CITY_BUNDLE);
+            Boolean isExtraParams = savedInstanceState.getBoolean(ADD_OPTIONS_BUNDLE);
+            if (isExtraParams) {
+                txtWindSpeed.setVisibility(View.VISIBLE);
+                txtHimidity.setVisibility(View.VISIBLE);
+            } else {
+                txtWindSpeed.setVisibility(View.INVISIBLE);
+                txtHimidity.setVisibility(View.INVISIBLE);
+            }
+            txtCityName.setText(currentCityName);
+            String enCityName = "";
+
+            if (getString(R.string.moscow_city) == currentCityName) {
+                enCityName = getString(R.string.moscow_city_en);
             }
 
+
+            if (getString(R.string.sochi_city) == currentCityName) {
+                enCityName = getString(R.string.sochi_city_en);
+            }
+
+
+            if (getString(R.string.novosibirsk_city) == currentCityName) {
+                enCityName = getString(R.string.novosibirsk_city_en);
+            }
+
+            if (getString(R.string.saint_petersburg_city) == currentCityName) {
+                enCityName = getString(R.string.saint_petersburg_city_en);
+            }
+
+
+            if (getString(R.string.ekaterinburg_city) == currentCityName) {
+                enCityName = getString(R.string.ekaterinburg_city_en);
+            }
+
+
+            if (getString(R.string.chelyabinsk_city) == currentCityName) {
+                enCityName = getString(R.string.ekaterinburg_city_en);
+            }
+
+
+            if (getString(R.string.ufa_city) == currentCityName) {
+                enCityName = getString(R.string.ufa_city_en);
+            }
+
+            GettingWeather gettingWeather = new GettingWeather(enCityName, getContext(), txtTemperature, txtWindSpeed, txtHimidity);
+            gettingWeather.getWeather();
 
         }
 
         btnWeatherHistory = view.findViewById(R.id.btnWeatherHistory);
-        btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
+        btnWeatherHistory.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 Intent intent = new Intent(getContext(), HistoryActivity.class);
                 startActivity(intent);
             }
         });
+        btnChangeCity.setOnClickListener(new View.OnClickListener()
 
-
-        btnChangeCity.setOnClickListener(new View.OnClickListener() {
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 Fragment fragment = null;
                 fragment = new OneFragment();
                 FragmentManager fm = getFragmentManager();
@@ -100,10 +130,11 @@ public class MainFragment extends Fragment implements Constants {
                 ft.commit();
             }
         });
+    }
 
-
-
-
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
 
     }
 }

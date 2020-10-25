@@ -40,21 +40,11 @@ public class OneFragment extends Fragment implements Constants {
     Fragment fragMain;
     FragmentTransaction fTrans;
     CheckBox chkExtraParams;
-
     CityAdapter adapter;
     RecyclerView cityRecyclerView;
     TextView txtViewCity;
     TextView txtTown;
     ArrayList myList;
-    Button btnAddCity;
-    EditText edtAddCity;
-    Pattern checkCity = Pattern.compile("[А-Я][а-я]{2,}$");
-
-    private final String[] cities = {
-            "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург",
-            "Рязань", "Челябинск", "Уфа"
-    };
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,20 +53,24 @@ public class OneFragment extends Fragment implements Constants {
 
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         myList = new ArrayList<String>();
-//        myList = (ArrayList<String>)Arrays.asList(cities);
-        Collections.addAll(myList, cities);
 
-
+        myList.add(getString(R.string.moscow_city));
+        myList.add(getString(R.string.saint_petersburg_city));
+        myList.add(getString(R.string.novosibirsk_city));
+        myList.add(getString(R.string.ekaterinburg_city));
+        myList.add(getString(R.string.sochi_city));
+        myList.add(getString(R.string.chelyabinsk_city));
+        myList.add(getString(R.string.ufa_city));
         super.onViewCreated(view, savedInstanceState);
         txtViewCity = view.findViewById(R.id.txtViewCity);
         adapter = new CityAdapter();
         cityRecyclerView = view.findViewById(R.id.cityRecyclerView);
         cityRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
         cityRecyclerView.setAdapter(adapter);
+
         adapter.setList(myList);
         adapter.setOnCityClickListener(new OnCityClickListener() {
             @Override
@@ -85,23 +79,6 @@ public class OneFragment extends Fragment implements Constants {
                 txtTown.setText(city);
             }
         });
-
-        edtAddCity = view.findViewById(R.id.edtAddCity);
-        btnAddCity = view.findViewById(R.id.btnAddCity);
-        btnAddCity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String myCity = edtAddCity.getText().toString();
-                if (isCityCorrect(myCity, checkCity)) {
-                    Snackbar.make(view, "Вы хотите добавить '"+myCity+"' в список?", BaseTransientBottomBar.LENGTH_LONG).setAction("Да", (v1 -> {
-                        addCityToList(edtAddCity.getText().toString());
-                    })).show();
-                } else  {
-                    Snackbar.make(view,"Город должен состоять только из русских букв", BaseTransientBottomBar.LENGTH_SHORT).show();
-                }
-            }
-        });
-
 
         txtTown = view.findViewById(R.id.txtTown);
         btnConfirm = view.findViewById(R.id.confirmButton);
@@ -127,13 +104,10 @@ public class OneFragment extends Fragment implements Constants {
                     } else {
                         Snackbar.make(view,"Вы не выбрали город!", BaseTransientBottomBar.LENGTH_SHORT).show();
                     }
-
-
                 }
             });
 
         }
-
     }
 
     private boolean isCityCorrect (String value, Pattern check) {

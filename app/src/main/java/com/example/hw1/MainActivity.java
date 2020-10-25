@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     private String getScreenOrientation() {
         linearCurWeather = findViewById(R.id.linearCurWeather);
-        txtAboutWeather = findViewById(R.id.txtAboutWeather);
+
         linearDayButtons = findViewById(R.id.linearDayButtons);
         btnChangeCity = findViewById(R.id.btnChangeCity);
         txtCityChoose = findViewById(R.id.txtCityChoose);
@@ -80,12 +80,13 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
 
 
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             return "Портретная ориентация";
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
             linearCurWeather.setPadding(0, 0, 0, 0);
-            txtAboutWeather.setPadding(0,0,0,0);
+//            txtAboutWeather.setPadding(0,0,0,0);
             linearDayButtons.setPadding(0, 0, 0, 0);
             btnChangeCity.setVisibility(View.GONE);
             txtCityChoose.setPadding(0, 0, 0, 0);
@@ -113,12 +114,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
 //        edtChangeCityName = findViewById(R.id.edtChangeCityName);
         chkExtraParams = findViewById(R.id.chkExtraParams);
         txtCityName = findViewById(R.id.txtCityName);
-        txtExtraWeather = findViewById(R.id.txtExtraWeather);
+//        txtExtraWeather = findViewById(R.id.txtExtraWeather);
 
         txtCityName.setText(edtChangeCityName.getText());
         int vis = chkExtraParams.isChecked() ? View.VISIBLE : View.GONE;
         txtExtraWeather.setVisibility(vis);
     }
+
+
 
 
 

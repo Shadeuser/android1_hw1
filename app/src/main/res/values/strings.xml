@@ -10,6 +10,22 @@
     <string name="changeYourCity">Change your City</string>
     <string name="currentCity">Moscow</string>
 
+    <string name="moscow_city">Moscow</string>
+    <string name="chelyabinsk_city">Chelyabinsk</string>
+    <string name="sochi_city">Sochi</string>
+    <string name="ufa_city">Ufa</string>
+    <string name="ekaterinburg_city">ekaterinburg</string>
+    <string name="saint_petersburg_city">Saint Petersburg</string>
+    <string name="novosibirsk_city">Novosibirsk</string>
+
+    <string name="moscow_city_en" translatable="false">Moscow</string>
+    <string name="chelyabinsk_city_en" translatable="false">Chelyabinsk</string>
+    <string name="sochi_city_en" translatable="false">Sochi</string>
+    <string name="ufa_city_en" translatable="false">Ufa</string>
+    <string name="ekaterinburg_city_en" translatable="false">ekaterinburg</string>
+    <string name="saint_petersburg_city_en" translatable="false">Saint Petersburg</string>
+    <string name="novosibirsk_city_en" translatable="false">Novosibirsk</string>
+
 
 
 

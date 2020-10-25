@@ -13,5 +13,13 @@
     <string name="changeYourCity">Выберете город</string>
     <string name="currentCity">Москва</string>
 
+    <string name="moscow_city">Москва</string>
+    <string name="chelyabinsk_city">Челябинск</string>
+    <string name="sochi_city">Сочи</string>
+    <string name="ufa_city">Уфа</string>
+    <string name="ekaterinburg_city">Екатеринбург</string>
+    <string name="saint_petersburg_city">Санкт Петербург</string>
+    <string name="novosibirsk_city">Новосибирск</string>
+
 
 </resources>
