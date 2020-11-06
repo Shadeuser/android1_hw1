@@ -193,7 +193,9 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Weather history"
-            android:theme="@style/Theme.MaterialComponents.Light"></com.google.android.material.button.MaterialButton>
+            android:theme="@style/Theme.MaterialComponents.Light">
+
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 

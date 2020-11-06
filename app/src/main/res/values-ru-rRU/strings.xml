@@ -21,5 +21,17 @@
     <string name="saint_petersburg_city">Санкт Петербург</string>
     <string name="novosibirsk_city">Новосибирск</string>
 
+    <string name="about_creator">О разработчке</string>
+    <string name="feedback_form">Форма обратной связи</string>
+    <string name="options">Настройки</string>
+    <string name="about_app">About application</string>
+    <string name="help">Помощь</string>
+
+
+
+
+
+
+
 
 </resources>

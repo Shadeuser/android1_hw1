@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wheather</string>
+    <string name="app_name">Wheather forecast</string>
     <string name="city_name">Moscow</string>
     <string name="head_name">Wheather forecast</string>
     <string name="temperature">+25</string>
@@ -26,7 +26,12 @@
     <string name="saint_petersburg_city_en" translatable="false">Saint Petersburg</string>
     <string name="novosibirsk_city_en" translatable="false">Novosibirsk</string>
 
-
+    <!--    navigation_drawer-->
+    <string name="about_creator">About creator</string>
+    <string name="feedback_form">Feedback</string>
+    <string name="options">Options</string>
+    <string name="about_app">About application</string>
+    <string name="help">Help</string>
 
 
 </resources>
