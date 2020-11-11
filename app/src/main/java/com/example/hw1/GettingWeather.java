@@ -1,6 +1,8 @@
 package com.example.hw1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Handler;
 import android.widget.TextView;
@@ -69,7 +71,22 @@ public class GettingWeather {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, "Ошибка Загруза данных", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context, "Ошибка Загруза данных", Toast.LENGTH_LONG).show();
+                                new AlertDialog.Builder(context)
+                                         .setTitle("Внимание!")
+                                        .setMessage("Ошибка получения данных.")
+                                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                        .setIcon(R.drawable.ic_baseline_error_24)
+                                        .setCancelable(false)
+                                        .create()
+                                        .show();
+
+
                             }
                         });
 

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="cities">
-        <item>Москва</item>
-        <item>Челябинск</item>
-        <item>Горноалтайск</item>
-        <item>Великий Новгород</item>
-        <item>Владимир</item>
+        <item name="moscow_city">Moscow</item>
+        <item name="chelyabinsk_city">Chelyabinsk</item>
+        <item name="sochi_city">Sochi</item>
+        <item name="ufa_city">Ufa</item>
+        <item name="ekaterinburg_city">ekaterinburg</item>
+        <item name="saint_petersburg_city">Saint Petersburg</item>
+        <item name="novosibirsk_city">Novosibirsk</item>
     </string-array>
 
 </resources>

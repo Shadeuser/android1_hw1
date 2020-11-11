@@ -94,34 +94,19 @@ public class MainActivity extends AppCompatActivity implements Constants{
 
     private String getScreenOrientation() {
         linearCurWeather = findViewById(R.id.linearCurWeather);
-        linearDayButtons = findViewById(R.id.linearDayButtons);
         btnChangeCity = findViewById(R.id.btnChangeCity);
-        txtCityChoose = findViewById(R.id.txtCityChoose);
-        cityRecyclerView = findViewById(R.id.cityRecyclerView);
-
-
-
-
-
-
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             return "Портретная ориентация";
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-            linearCurWeather.setPadding(0, 0, 0, 0);
-//            txtAboutWeather.setPadding(0,0,0,0);
-            linearDayButtons.setPadding(0, 0, 0, 0);
-            btnChangeCity.setVisibility(View.GONE);
-            txtCityChoose.setPadding(0, 0, 0, 0);
-//            edtChangeCityName.setPadding(0, 50, 0, 0);
-
-            btnConfirm = findViewById(R.id.confirmButton);
-            btnConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickBtnConfirm();
-                }
-            });
+//            linearCurWeather.setPadding(0, 0, 0, 0);
+//            btnChangeCity.setVisibility(View.GONE);
+//            btnConfirm.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    onClickBtnConfirm();
+//                }
+//            });
             return "Альбомная ориентация";
         } else {
             return "";
@@ -135,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements Constants{
 
     public void onClickBtnConfirm() {
 //        edtChangeCityName = findViewById(R.id.edtChangeCityName);
-        chkExtraParams = findViewById(R.id.chkExtraParams);
+
         txtCityName = findViewById(R.id.txtCityName);
 //        txtExtraWeather = findViewById(R.id.txtExtraWeather);
 

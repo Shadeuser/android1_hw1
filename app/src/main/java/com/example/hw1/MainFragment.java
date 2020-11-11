@@ -1,6 +1,8 @@
 package com.example.hw1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -17,15 +19,18 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class MainFragment extends Fragment implements Constants {
+public class MainFragment extends Fragment implements Constants, DialogResult {
 
 
     Button btnChangeCity;
@@ -34,6 +39,8 @@ public class MainFragment extends Fragment implements Constants {
     TextView txtWindSpeed;
     TextView txtHimidity;
     TextView txtCityName;
+    DialogResult callBack;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,86 +55,25 @@ public class MainFragment extends Fragment implements Constants {
         super.onViewCreated(view, savedInstanceState);
         btnChangeCity = view.findViewById(R.id.btnChangeCity);
         txtTemperature = view.findViewById(R.id.txtTemperature);
-        savedInstanceState = getArguments();
-        if (savedInstanceState != null) {
-
-//            savedInstanceState = getArguments();
-            txtTemperature = view.findViewById(R.id.txtTemperature);
-            txtWindSpeed = view.findViewById(R.id.txtWindSpeed);
-            txtHimidity = view.findViewById(R.id.txtHumidity);
-            txtCityName = view.findViewById(R.id.txtCityName);
-            String currentCityName = savedInstanceState.getString(CITY_BUNDLE);
-            Boolean isExtraParams = savedInstanceState.getBoolean(ADD_OPTIONS_BUNDLE);
-            if (isExtraParams) {
-                txtWindSpeed.setVisibility(View.VISIBLE);
-                txtHimidity.setVisibility(View.VISIBLE);
-            } else {
-                txtWindSpeed.setVisibility(View.INVISIBLE);
-                txtHimidity.setVisibility(View.INVISIBLE);
-            }
-            txtCityName.setText(currentCityName);
-            String enCityName = "";
-
-            if (getString(R.string.moscow_city) == currentCityName) {
-                enCityName = getString(R.string.moscow_city_en);
-            }
-
-
-            if (getString(R.string.sochi_city) == currentCityName) {
-                enCityName = getString(R.string.sochi_city_en);
-            }
-
-
-            if (getString(R.string.novosibirsk_city) == currentCityName) {
-                enCityName = getString(R.string.novosibirsk_city_en);
-            }
-
-            if (getString(R.string.saint_petersburg_city) == currentCityName) {
-                enCityName = getString(R.string.saint_petersburg_city_en);
-            }
-
-
-            if (getString(R.string.ekaterinburg_city) == currentCityName) {
-                enCityName = getString(R.string.ekaterinburg_city_en);
-            }
-
-
-            if (getString(R.string.chelyabinsk_city) == currentCityName) {
-                enCityName = getString(R.string.ekaterinburg_city_en);
-            }
-
-
-            if (getString(R.string.ufa_city) == currentCityName) {
-                enCityName = getString(R.string.ufa_city_en);
-            }
-
-            GettingWeather gettingWeather = new GettingWeather(enCityName, getContext(), txtTemperature, txtWindSpeed, txtHimidity);
-            gettingWeather.getWeather();
-
-        }
-
+        txtTemperature = view.findViewById(R.id.txtTemperature);
+        txtWindSpeed = view.findViewById(R.id.txtWindSpeed);
+        txtHimidity = view.findViewById(R.id.txtHumidity);
+        txtCityName = view.findViewById(R.id.txtCityName);
         btnWeatherHistory = view.findViewById(R.id.btnWeatherHistory);
-        btnWeatherHistory.setOnClickListener(new View.OnClickListener()
 
-        {
+        btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HistoryActivity.class);
                 startActivity(intent);
             }
         });
-        btnChangeCity.setOnClickListener(new View.OnClickListener()
-
-        {
+        btnChangeCity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
-                Fragment fragment = null;
-                fragment = new OneFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-
-                ft.replace(R.id.frPlace, fragment);
-                ft.commit();
+            public void onClick(View v) {
+                callBack = MainFragment.this;
+                MyBottomSheetDialogFragment dialogFragment = new MyBottomSheetDialogFragment(callBack);
+                dialogFragment.show(getFragmentManager(), "dialog_fragment");
             }
         });
     }
@@ -136,5 +82,58 @@ public class MainFragment extends Fragment implements Constants {
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
 
+    }
+
+    @Override
+    public void callBackResult(String city, boolean isExtra) {
+
+
+        if (isExtra) {
+            txtWindSpeed.setVisibility(View.VISIBLE);
+            txtHimidity.setVisibility(View.VISIBLE);
+        } else {
+            txtWindSpeed.setVisibility(View.INVISIBLE);
+            txtHimidity.setVisibility(View.INVISIBLE);
+        }
+        txtCityName.setText(city);
+        String enCityName = "";
+
+
+
+        if (getString(R.string.moscow_city) == city) {
+            enCityName = getString(R.string.moscow_city_en);
+        }
+
+
+        if (getString(R.string.sochi_city) == city) {
+            enCityName = getString(R.string.sochi_city_en);
+        }
+
+
+        if (getString(R.string.novosibirsk_city) == city) {
+            enCityName = getString(R.string.novosibirsk_city_en);
+        }
+
+        if (getString(R.string.saint_petersburg_city) == city) {
+            enCityName = getString(R.string.saint_petersburg_city_en);
+        }
+
+
+        if (getString(R.string.ekaterinburg_city) == city) {
+            enCityName = getString(R.string.ekaterinburg_city_en);
+        }
+
+
+        if (getString(R.string.chelyabinsk_city) == city) {
+            enCityName = getString(R.string.ekaterinburg_city_en);
+        }
+
+
+        if (getString(R.string.ufa_city) == city) {
+            enCityName = getString(R.string.ufa_city_en);
+        }
+
+        GettingWeather gettingWeather = new GettingWeather(enCityName, getContext(), txtTemperature, txtWindSpeed, txtHimidity);
+        gettingWeather.getWeather();
     }
 }
