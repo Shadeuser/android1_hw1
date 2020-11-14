@@ -47,6 +47,7 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
 
+
     }
 
 

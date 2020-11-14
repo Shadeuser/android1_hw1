@@ -44,54 +44,21 @@ public class GettingWeather {
         try {
             final URL uri = new URL(WEATHER_URL_START + CurrentCity + WEATHER_URL_END + API_KEY);
             final Handler handler = new Handler();
+
             new Thread(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void run() {
-                    HttpsURLConnection urlConnection = null;
-
-                    try {
-                        urlConnection = (HttpsURLConnection) uri.openConnection();
-                        urlConnection.setRequestMethod("GET");
-                        urlConnection.setReadTimeout(10000);
-                        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                        String result = getLines(in);
-
-                        Gson gson = new Gson();
-
-                        final WeatherRequest weatherRequest = gson.fromJson(result, WeatherRequest.class);
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                putToView(weatherRequest);
-                            }
-                        });
-                    } catch (IOException e) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-//                                Toast.makeText(context, "Ошибка Загруза данных", Toast.LENGTH_LONG).show();
-                                new AlertDialog.Builder(context)
-                                         .setTitle("Внимание!")
-                                        .setMessage("Ошибка получения данных.")
-                                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        })
-                                        .setIcon(R.drawable.ic_baseline_error_24)
-                                        .setCancelable(false)
-                                        .create()
-                                        .show();
-
-
-                            }
-                        });
-
-                        e.printStackTrace();
-                    }
+                    UrlData urlData = new UrlData(handler);
+                    String result = urlData.getUrlData(uri, context);
+                    Gson gson = new Gson();
+                    final WeatherRequest weatherRequest = gson.fromJson(result, WeatherRequest.class);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            putToView(weatherRequest);
+                        }
+                    });
                 }
             }).start();
         } catch (
@@ -99,7 +66,6 @@ public class GettingWeather {
             e.printStackTrace();
         }
     }
-
 
     public void putToView(WeatherRequest weatherRequest) {
         temperature.setText("Температура: " + weatherRequest.getMain().getTemp());
