@@ -10,4 +10,6 @@
         <item name="novosibirsk_city">Novosibirsk</item>
     </string-array>
 
+    <fraction name="absolute_zero">-273.15</fraction>
+
 </resources>

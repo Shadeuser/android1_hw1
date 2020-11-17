@@ -1,18 +1,14 @@
 package com.example.hw1;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +16,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity implements Constants{
 
@@ -84,46 +75,32 @@ public class MainActivity extends AppCompatActivity implements Constants{
                 return true;
             }
         });
-        getScreenOrientation();
+//        getScreenOrientation();
     }
 
 
+//    private String getScreenOrientation() {
+//        linearCurWeather = findViewById(R.id.linearCurWeather);
+//        btnChangeCity = findViewById(R.id.btnChangeCity);
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//
+//            return "Портретная ориентация";
+//        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            ConstraintSet constraintSet = new ConstraintSet();
+//            constraintSet.clone(mainConstraintLayout);
+//            constraintSet.connect(R.id.txtHumidity, ConstraintSet.RIGHT, R.id.txtTemperature , ConstraintSet.RIGHT, 0);
+//            constraintSet.applyTo(mainConstraintLayout);
+//
+//
+//            return "Альбомная ориентация";
+//        } else {
+//            return "";
+//        }
 
-
-
-
-    private String getScreenOrientation() {
-        linearCurWeather = findViewById(R.id.linearCurWeather);
-        btnChangeCity = findViewById(R.id.btnChangeCity);
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            return "Портретная ориентация";
-        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-//            linearCurWeather.setPadding(0, 0, 0, 0);
-//            btnChangeCity.setVisibility(View.GONE);
-//            btnConfirm.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onClickBtnConfirm();
-//                }
-//            });
-            return "Альбомная ориентация";
-        } else {
-            return "";
-        }
-
-    }
-
-
-
-
+//    }
 
     public void onClickBtnConfirm() {
-//        edtChangeCityName = findViewById(R.id.edtChangeCityName);
-
         txtCityName = findViewById(R.id.txtCityName);
-//        txtExtraWeather = findViewById(R.id.txtExtraWeather);
-
         txtCityName.setText(edtChangeCityName.getText());
         int vis = chkExtraParams.isChecked() ? View.VISIBLE : View.GONE;
         txtExtraWeather.setVisibility(vis);
@@ -140,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements Constants{
                 Toast.makeText(MainActivity.this,"Поиск временно не работает!", Toast.LENGTH_LONG).show();
                  return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;

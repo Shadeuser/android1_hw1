@@ -46,6 +46,7 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment imple
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         myCitySpinner = view.findViewById(R.id.myCitySpinner);
         ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.cities, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

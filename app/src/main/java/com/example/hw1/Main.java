@@ -8,8 +8,9 @@ public class Main {
     private String humidity;
     private String temp_min;
     private String temp_max;
+    private final float ABSOLUTE_ZERO = -273.15F;
 
-    DecimalFormat decimalFormat= new DecimalFormat("#.#");
+    DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
     public void setTemp(Float temp) {
         this.temp = temp;
@@ -34,7 +35,7 @@ public class Main {
     }
 
     public String getTemp() {
-        return decimalFormat.format(temp -273.15);
+        return decimalFormat.format(temp + ABSOLUTE_ZERO);
     }
 
     public String getPressure() {

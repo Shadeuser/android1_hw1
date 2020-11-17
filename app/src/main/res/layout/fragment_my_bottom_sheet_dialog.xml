@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/myLinearLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,17 +17,18 @@
         android:text="Выберете город:">
 
     </TextView>
+
     <Spinner
         android:id="@+id/myCitySpinner"
-        android:layout_marginStart="2dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnConfirmCity"
+        style="@style/WeatherButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/WeatherButtonStyle"
         android:text="Confirm"
         android:theme="@style/Theme.MaterialComponents.Light" />
 

@@ -33,6 +33,11 @@
     <string name="about_app">About application</string>
     <string name="help">Help</string>
 
+    <string name="txt_temperature">Temperature: </string>
+    <string name="txt_windspeed">Wind speed: </string>
+    <string name="txt_himidity">Humidity: </string>
+
+
 
 
 
