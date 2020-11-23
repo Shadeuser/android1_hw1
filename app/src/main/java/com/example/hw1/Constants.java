@@ -10,6 +10,7 @@ public interface Constants {
     final String WEATHER_BUNDLE="WEATHER_BUNDLE";
     final String LOG_INFO = "LOG_INFO";
     int RESULT_INT = 112;
+    final String CITY_SAVE = "CITY";
 
 
 

@@ -1,9 +1,11 @@
 package com.example.hw1;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,17 +33,31 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hw1.database.App;
+import com.example.hw1.database.RandomWeather;
+import com.example.hw1.database.WeatherDao;
+import com.example.hw1.database.WeatherSource;
+import com.example.hw1.database.WeatherStore;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import android.content.SharedPreferences;
+
 import org.w3c.dom.Text;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MainFragment extends Fragment implements Constants, DialogResult {
 
@@ -64,6 +80,7 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
     final String SANKT_PETERSBURG = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Coat_of_Arms_of_Saint_Petersburg_%282003%29.svg/200px-Coat_of_Arms_of_Saint_Petersburg_%282003%29.svg.png";
 
     ConstraintLayout mainConstraintLayout;
+    WeatherSource weatherSource;
 
 
     final String API_KEY = "0df31282d60ddb7c0c246690e01e8a84";
@@ -74,13 +91,17 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
 
-
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        WeatherDao weatherDao = App
+                .getInstance()
+                .getWeatherDao();
+        weatherSource = new WeatherSource(weatherDao);
         mainConstraintLayout = view.findViewById(R.id.mainConstraintLayout);
         getScreenOrientation(view);
 
@@ -89,7 +110,6 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
         Picasso.get()
                 .load(NOVOSIBIRSK)
                 .into(imageViewCity);
-
         btnChangeCity = view.findViewById(R.id.btnChangeCity);
         txtTemperature = view.findViewById(R.id.txtTemperature);
         txtTemperature = view.findViewById(R.id.txtTemperature);
@@ -97,6 +117,13 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
         txtHimidity = view.findViewById(R.id.txtHumidity);
         txtCityName = view.findViewById(R.id.txtCityName);
         btnWeatherHistory = view.findViewById(R.id.btnWeatherHistory);
+
+        if (savedInstanceState == null) {
+            SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+            String citySave = sharedPreferences.getString(CITY_SAVE, "NONE");
+            callBackResult(citySave.toString(), true);
+
+        }
 
         btnWeatherHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,21 +137,9 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
             public void onClick(View v) {
                 callBack = MainFragment.this;
                 MyBottomSheetDialogFragment dialogFragment = new MyBottomSheetDialogFragment(callBack);
-
                 dialogFragment.show(getFragmentManager(), "dialog_fragment");
-//                BottomSheetDialog dialog =(BottomSheetDialog) dialogFragment.getDialog();
-//                LinearLayout linearLayout = dialog.findViewById(R.layout.fragment_my_bottom_sheet_dialog);
-//                dialog.findViewById(android.support.design.R.id.design_bottom_sheet);
 
 
-
-
-//                BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
-//                FrameLayout bottomSheet = (FrameLayout)
-//                        dialog.findViewById(android.support.design.R.id.design_bottom_sheet);
-//                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-//                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//                behavior.setPeekHeight(0); // Remove this line to hide a dark background if you m
             }
         });
     }
@@ -137,8 +152,6 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
 
     @Override
     public void callBackResult(String city, boolean isExtra) {
-
-
         if (isExtra) {
             txtWindSpeed.setVisibility(View.VISIBLE);
             txtHimidity.setVisibility(View.VISIBLE);
@@ -150,54 +163,45 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
         String enCityName = "";
         String thisCity = "";
 
-        if (getString(R.string.moscow_city) == city) {
+        if (getString(R.string.moscow_city).equals(city)) {
             enCityName = getString(R.string.moscow_city_en);
             thisCity = MOSCOW;
         }
-
-
-        if (getString(R.string.sochi_city) == city) {
+        if (getString(R.string.sochi_city).equals(city)) {
             enCityName = getString(R.string.sochi_city_en);
             thisCity = SOCHI;
         }
-
-
-        if (getString(R.string.novosibirsk_city) == city) {
+        if (getString(R.string.novosibirsk_city).equals(city)) {
             enCityName = getString(R.string.novosibirsk_city_en);
             thisCity = NOVOSIBIRSK;
         }
-
-        if (getString(R.string.saint_petersburg_city) == city) {
+        if (getString(R.string.saint_petersburg_city).equals(city)) {
             enCityName = getString(R.string.saint_petersburg_city_en);
             thisCity = SANKT_PETERSBURG;
         }
-
-
-        if (getString(R.string.ekaterinburg_city) == city) {
+        if (getString(R.string.ekaterinburg_city).equals(city)) {
             enCityName = getString(R.string.ekaterinburg_city_en);
             thisCity = EKATERINBURG;
         }
-
-
-        if (getString(R.string.chelyabinsk_city) == city) {
+        if (getString(R.string.chelyabinsk_city).equals(city)) {
             enCityName = getString(R.string.chelyabinsk_city_en);
             thisCity = CHELYABINSK;
         }
-
-
-        if (getString(R.string.ufa_city) == city) {
+        if (getString(R.string.ufa_city).equals(city)) {
             enCityName = getString(R.string.ufa_city_en);
             thisCity = UFA;
         }
-
-
-//        GettingWeather gettingWeather = new GettingWeather(enCityName, getContext(), txtTemperature, txtWindSpeed, txtHimidity);
-//        gettingWeather.getWeather();
         requestRetrofit(enCityName, API_KEY);
+        SharedPreferences sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CITY_SAVE, city);
+        editor.commit();
         Picasso.get()
                 .load(thisCity)
                 .into(imageViewCity);
     }
+
+
 
     private void initRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -214,13 +218,24 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
                     @Override
                     public void onResponse(Call<WeatherRequest> call, Response<WeatherRequest> response) {
                         if (response.body() != null) {
+                            final String temp = response.body().getMain().getTemp();
+                            final String wind = response.body().getWind().getSpeed();
+                            final String humidity = response.body().getMain().getHumidity();
+                            txtTemperature.setText(getString(R.string.txt_temperature) + temp);
+                            txtWindSpeed.setText(getString(R.string.txt_windspeed) + wind);
+                            txtHimidity.setText(getString(R.string.txt_himidity) + humidity);
+                            WeatherStore insertWeatherStore = new WeatherStore();
+                            insertWeatherStore.cityName = city;
+                            Date date = new Date();
+                            DateFormat dateFormat = new SimpleDateFormat("dd.MM hh:mm");
+                            String strDate = dateFormat.format(date);
+                            insertWeatherStore.dateTime = strDate;
+                            insertWeatherStore.temperature = temp;
+                            insertWeatherStore.windSpeed = Integer.parseInt(wind);
+                            insertWeatherStore.humidity = Integer.parseInt(humidity);
+                            weatherSource.addWeatherStore(insertWeatherStore);
 
-                            final String temp = getString(R.string.txt_temperature) + response.body().getMain().getTemp();
-                            final String wind = getString(R.string.txt_windspeed) + response.body().getWind().getSpeed();
-                            final String humidity = getString(R.string.txt_himidity) + response.body().getMain().getHumidity();
-                            txtTemperature.setText(temp);
-                            txtWindSpeed.setText(wind);
-                            txtHimidity.setText(humidity);
+
                         }
 
                     }
@@ -247,11 +262,13 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
             constraintSet.connect(R.id.textViewHead, ConstraintSet.END, view.getId(), ConstraintSet.END, 0);
             constraintSet.connect(R.id.imageViewCity, ConstraintSet.TOP, view.getId(), ConstraintSet.TOP, 0);
             constraintSet.applyTo(mainConstraintLayout);
-
-
             return "Альбомная ориентация";
         } else {
             return "";
         }
+    }
+
+    private void checkCity(String city) {
+
     }
 }

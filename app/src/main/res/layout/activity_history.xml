@@ -9,6 +9,15 @@
     android:background="@color/appBackgroundColor"
     tools:context=".HistoryActivity">
 
+<!--    <Button-->
+<!--        android:id="@+id/btnRecDatabase"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="400dp"-->
+<!--        android:text="Записать в базу!">-->
+
+<!--    </Button>-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newRecyclerView"
         android:layout_width="match_parent"
@@ -27,6 +36,7 @@
         app:menu="@menu/activity_main_drawer">
 
     </com.google.android.material.navigation.NavigationView>
+
 
 
 
