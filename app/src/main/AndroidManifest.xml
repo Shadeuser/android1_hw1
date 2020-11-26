@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreatorActivity"></activity>
+        <service android:name=".MyFirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+
+        <activity android:name=".CreatorActivity" />
         <activity android:name=".HistoryActivity" />
         <activity
             android:name=".MainActivity"

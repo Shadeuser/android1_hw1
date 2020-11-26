@@ -12,11 +12,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,31 +35,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hw1.broadcast.AirReceiver;
+import com.example.hw1.broadcast.BatteryReceiver;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity implements Constants{
 
 
 
     //For dimensions MainFr
-    LinearLayout linearCurWeather;
-    LinearLayout linearDayButtons;
-    Button btnChangeCity;
     TextView txtCityName;
     TextView txtExtraWeather;
 
     //For dimensions OneFr
-    TextView txtCityChoose;
+
     EditText edtChangeCityName;
-    Button btnConfirm;
     CheckBox chkExtraParams;
     FragmentTransaction fTrans;
-    RecyclerView cityRecyclerView;
-
     NavigationView navigationView;
-
-
     final String MY_TAG ="MY_TAG";
+    AirReceiver airReceiver;
+    BatteryReceiver batteryReceiver;
+
 
 
 
@@ -61,6 +69,17 @@ public class MainActivity extends AppCompatActivity implements Constants{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        airReceiver = new AirReceiver();
+        registerReceiver(airReceiver, new
+                IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED));
+
+        batteryReceiver = new BatteryReceiver();
+        registerReceiver(batteryReceiver, new
+                IntentFilter(Intent.ACTION_BATTERY_LOW));
+
+        initGetToken();
+        initNotificationChannel();
+
         navigationView = findViewById(R.id.nav_View);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -75,30 +94,31 @@ public class MainActivity extends AppCompatActivity implements Constants{
                 return true;
             }
         });
-//        getScreenOrientation();
     }
 
 
-//    private String getScreenOrientation() {
-//        linearCurWeather = findViewById(R.id.linearCurWeather);
-//        btnChangeCity = findViewById(R.id.btnChangeCity);
-//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-//
-//            return "Портретная ориентация";
-//        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            ConstraintSet constraintSet = new ConstraintSet();
-//            constraintSet.clone(mainConstraintLayout);
-//            constraintSet.connect(R.id.txtHumidity, ConstraintSet.RIGHT, R.id.txtTemperature , ConstraintSet.RIGHT, 0);
-//            constraintSet.applyTo(mainConstraintLayout);
-//
-//
-//            return "Альбомная ориентация";
-//        } else {
-//            return "";
-//        }
 
-//    }
+    private void initGetToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("PushMessage", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                    }
+                });
+    }
 
+    private void initNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel("2", "name", importance);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
     public void onClickBtnConfirm() {
         txtCityName = findViewById(R.id.txtCityName);
         txtCityName.setText(edtChangeCityName.getText());
@@ -123,5 +143,12 @@ public class MainActivity extends AppCompatActivity implements Constants{
             }
         });
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(airReceiver);
+        unregisterReceiver(batteryReceiver);
     }
 }

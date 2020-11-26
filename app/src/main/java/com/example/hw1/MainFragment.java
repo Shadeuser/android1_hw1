@@ -2,12 +2,15 @@ package com.example.hw1;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,6 +61,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class MainFragment extends Fragment implements Constants, DialogResult {
 
@@ -79,6 +83,8 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
     final String NOVOSIBIRSK = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Coat_of_Arms_of_Novosibirsk.svg/200px-Coat_of_Arms_of_Novosibirsk.svg.png";
     final String SANKT_PETERSBURG = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Coat_of_Arms_of_Saint_Petersburg_%282003%29.svg/200px-Coat_of_Arms_of_Saint_Petersburg_%282003%29.svg.png";
 
+
+
     ConstraintLayout mainConstraintLayout;
     WeatherSource weatherSource;
 
@@ -90,8 +96,19 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
+//        initNotificationChannel();
 
     }
+
+
+//    private void initNotificationChannel() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationManager notificationManager = (NotificationManager)
+//                    getContext().getSystemService(NOTIFICATION_SERVICE);
+//            int importance =    NotificationManager.IMPORTANCE_LOW;
+//            NotificationChannel channel = new NotificationChannel("2", "name", importance);
+//        }
+//    }
 
 
     @Override
@@ -107,9 +124,9 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
 
         initRetrofit();
         imageViewCity = view.findViewById(R.id.imageViewCity);
-        Picasso.get()
-                .load(NOVOSIBIRSK)
-                .into(imageViewCity);
+//        Picasso.get()
+//                .load(NOVOSIBIRSK)
+//                .into(imageViewCity);
         btnChangeCity = view.findViewById(R.id.btnChangeCity);
         txtTemperature = view.findViewById(R.id.txtTemperature);
         txtTemperature = view.findViewById(R.id.txtTemperature);
@@ -130,6 +147,8 @@ public class MainFragment extends Fragment implements Constants, DialogResult {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HistoryActivity.class);
                 startActivity(intent);
+
+
             }
         });
         btnChangeCity.setOnClickListener(new View.OnClickListener() {
