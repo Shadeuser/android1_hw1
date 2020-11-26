@@ -3,9 +3,39 @@
 
 <resources>
     <string name="app_name">Погода</string>
-    <string name="city_name">Москва, Россия</string>
+    <string name="city_name">Москва</string>
     <string name="head_name">Прогноз Погоды</string>
     <string name="temperature">+25</string>
     <string name="cloudy">Переменная облачность</string>
+    <string name="cityChoose">Выберете город: </string>
+    <string name="confirmButtonText">Выбрать</string>
+    <string name="extraOptionseText">Показывать доп. параметры</string>
+    <string name="changeYourCity">Выберете город</string>
+    <string name="currentCity">Москва</string>
+
+    <string name="moscow_city">Москва</string>
+    <string name="chelyabinsk_city">Челябинск</string>
+    <string name="sochi_city">Сочи</string>
+    <string name="ufa_city">Уфа</string>
+    <string name="ekaterinburg_city">Екатеринбург</string>
+    <string name="saint_petersburg_city">Санкт Петербург</string>
+    <string name="novosibirsk_city">Новосибирск</string>
+
+    <string name="about_creator">О разработчке</string>
+    <string name="feedback_form">Форма обратной связи</string>
+    <string name="options">Настройки</string>
+    <string name="about_app">About application</string>
+    <string name="help">Помощь</string>
+
+    <string name="txt_temperature">Температура: </string>
+    <string name="txt_windspeed">Скорость ветра: </string>
+    <string name="txt_himidity">Влажность: </string>
+
+
+
+
+
+
+
 
 </resources>

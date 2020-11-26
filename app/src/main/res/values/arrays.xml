@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities">
+        <item name="moscow_city">Moscow</item>
+        <item name="chelyabinsk_city">Chelyabinsk</item>
+        <item name="sochi_city">Sochi</item>
+        <item name="ufa_city">Ufa</item>
+        <item name="ekaterinburg_city">Ekaterinburg</item>
+        <item name="saint_petersburg_city">Saint Petersburg</item>
+        <item name="novosibirsk_city">Novosibirsk</item>
+    </string-array>
+    <fraction name="absolute_zero">-273.15</fraction>
+
+</resources>

@@ -3,8 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="appBackgroundColor">#00574B</color>
+    <color name="appBackgroundColor">#ABBABA</color>
     <color name="daysOfWeekColor">#ffffff</color>
-    <color name="temperatureColor">#43ffff</color>
+    <color name="temperatureColor">#008DB0</color>
     <color name="buttonsColor">#99ccff</color>
+    <color name="black">#000000</color>
+
+
 </resources>

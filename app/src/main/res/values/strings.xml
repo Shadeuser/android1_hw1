@@ -1,9 +1,44 @@
 <resources>
-    <string name="app_name">Wheather</string>
-    <string name="city_name">Moscow, Russia</string>
+    <string name="app_name">Wheather forecast</string>
+    <string name="city_name">Moscow</string>
     <string name="head_name">Wheather forecast</string>
     <string name="temperature">+25</string>
     <string name="cloudy">Partly cloudy</string>
+    <string name="cityChoose">Choose your city:</string>
+    <string name="confirmButtonText">Confirm</string>
+    <string name="extraOptionseText">Show extra options</string>
+    <string name="changeYourCity">Change your City</string>
+    <string name="currentCity">Moscow</string>
+
+    <string name="moscow_city">Moscow</string>
+    <string name="chelyabinsk_city">Chelyabinsk</string>
+    <string name="sochi_city">Sochi</string>
+    <string name="ufa_city">Ufa</string>
+    <string name="ekaterinburg_city">Ekaterinburg</string>
+    <string name="saint_petersburg_city">Saint Petersburg</string>
+    <string name="novosibirsk_city">Novosibirsk</string>
+
+    <string name="moscow_city_en" translatable="false">Moscow</string>
+    <string name="chelyabinsk_city_en" translatable="false">Chelyabinsk</string>
+    <string name="sochi_city_en" translatable="false">Sochi</string>
+    <string name="ufa_city_en" translatable="false">Ufa</string>
+    <string name="ekaterinburg_city_en" translatable="false">Ekaterinburg</string>
+    <string name="saint_petersburg_city_en" translatable="false">Saint Petersburg</string>
+    <string name="novosibirsk_city_en" translatable="false">Novosibirsk</string>
+
+    <!--    navigation_drawer-->
+    <string name="about_creator">About creator</string>
+    <string name="feedback_form">Feedback</string>
+    <string name="options">Options</string>
+    <string name="about_app">About application</string>
+    <string name="help">Help</string>
+
+    <string name="txt_temperature">Temperature: </string>
+    <string name="txt_windspeed">Wind speed: </string>
+    <string name="txt_himidity">Humidity: </string>
+
+
+
 
 
 </resources>

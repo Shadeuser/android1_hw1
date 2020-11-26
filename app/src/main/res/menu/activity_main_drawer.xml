@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_about_creator"
+            android:title="@string/about_creator"/>
+        <item
+            android:id="@+id/item_feedback_form"
+            android:title="@string/feedback_form"/>
+        <item
+            android:id="@+id/item_options"
+            android:title="@string/options"/>
+        <item
+            android:id="@+id/item_about_app"
+            android:title="@string/about_app"/>
+        <item
+            android:id="@+id/help"
+            android:title="@string/help"/>
+    </group>
+
+</menu>
