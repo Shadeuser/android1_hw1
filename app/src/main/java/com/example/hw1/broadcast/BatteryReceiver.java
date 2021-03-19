@@ -28,7 +28,7 @@ public class BatteryReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(messageId++, builder.build());
+        notificationManager.notify(messageId++, builder.build());ы
 
 
 
